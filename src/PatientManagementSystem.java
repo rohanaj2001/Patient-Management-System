@@ -20,7 +20,7 @@ public PatientManagementSystem(PatientDAO patientDAO) {
     JPanel mainPanel = new JPanel(new BorderLayout());
 
     // Create a panel for adding new patients
-    JPanel addPanel = new JPanel(new GridLayout(4, 2));
+    JPanel addPanel = new JPanel(new FlowLayout(4));
     JTextField idField = new JTextField();
     JTextField nameField = new JTextField();
     JTextField addressField = new JTextField();
@@ -37,7 +37,7 @@ public PatientManagementSystem(PatientDAO patientDAO) {
     addButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String id = idField.getText();
+            int id = Integer.parseInt(idField.getText());
             String name = nameField.getText();
             String address = addressField.getText();
             String phone = phoneField.getText();
@@ -62,7 +62,7 @@ public PatientManagementSystem(PatientDAO patientDAO) {
     searchButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String id = searchField.getText();
+            int id = Integer.parseInt(searchField.getText());
             Patient patient = patientDAO.getPatientById(id);
             if (patient != null) {
                 JOptionPane.showMessageDialog(PatientManagementSystem.this, patient.toString());
@@ -91,12 +91,12 @@ public PatientManagementSystem(PatientDAO patientDAO) {
     updateButton.addActionListener(new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent e) {
-    String id = updateIdField.getText();
+    int id = Integer.parseInt(updateIdField.getText());
     String name = updateNameField.getText();
     String address = updateAddressField.getText();
     String phone = updatePhoneField.getText();
     Patient patient = new Patient(id, name, address, phone);
-    boolean success = patientDAO.updatePatientById(id, patient);
+    boolean success = patientDAO.updatePatient(patient);
     if (success) {
     updatePatientTable();
     JOptionPane.showMessageDialog(PatientManagementSystem.this, "Patient updated successfully.");
@@ -107,7 +107,7 @@ public PatientManagementSystem(PatientDAO patientDAO) {
     });
     updatePanel.add(updateButton);
     // Create a panel for deleting patients
-    JPanel deletePanel = new JPanel(new FlowLayout());
+    JPanel deletePanel = new JPanel(new FlowLayout(100));
     JTextField deleteField = new JTextField(20);
     deletePanel.add(new JLabel("Delete by ID: "));
     deletePanel.add(deleteField);
@@ -115,7 +115,7 @@ public PatientManagementSystem(PatientDAO patientDAO) {
     deleteButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String id = deleteField.getText();
+            int id = Integer.parseInt(deleteField.getText());
             boolean success = patientDAO.deletePatientById(id);
             if (success) {
                 updatePatientTable();
