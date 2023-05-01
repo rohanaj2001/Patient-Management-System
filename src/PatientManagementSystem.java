@@ -66,8 +66,8 @@ public class PatientManagementSystem extends JFrame {
         addPanel.add(phoneField);
         JButton addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(80, 30));
-        addButton.setForeground(Color.WHITE); // Set the text color to white
-        addButton.setBackground(Color.BLACK);
+        addButton.setForeground(Color.BLACK); // Set the text color to white
+        addButton.setBackground(Color.WHITE);
     
 
         addButton.addActionListener(new ActionListener() {
@@ -107,8 +107,8 @@ public class PatientManagementSystem extends JFrame {
         updatePanel.add(updatePhoneField);
         JButton updateButton = new JButton("Update");
         updateButton.setPreferredSize(new Dimension(80, 30));
-        updateButton.setForeground(Color.WHITE); // Set the text color to white
-        updateButton.setBackground(Color.BLACK);
+        updateButton.setForeground(Color.BLACK); // Set the text color to white
+        updateButton.setBackground(Color.WHITE);
         updateIdField.setPreferredSize(new Dimension(updateIdField.getPreferredSize().width, 30));
         updateNameField.setPreferredSize(new Dimension(updateNameField.getPreferredSize().width, 30));
         updateAddressField.setPreferredSize(new Dimension(updateAddressField.getPreferredSize().width, 30));
@@ -141,8 +141,8 @@ public class PatientManagementSystem extends JFrame {
         searchPanel.add(searchField);
         JButton searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(80, 30));
-        searchButton.setForeground(Color.WHITE); // Set the text color to white
-        searchButton.setBackground(Color.BLACK);
+        searchButton.setForeground(Color.BLACK); // Set the text color to white
+        searchButton.setBackground(Color.WHITE);
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -166,8 +166,8 @@ public class PatientManagementSystem extends JFrame {
         deletePanel.add(deleteField);
         JButton deleteButton = new JButton("Delete");
         deleteButton.setPreferredSize(new Dimension(80, 30));
-        deleteButton.setForeground(Color.WHITE); // Set the text color to white
-        deleteButton.setBackground(Color.BLACK);
+        deleteButton.setForeground(Color.BLACK); // Set the text color to white
+        deleteButton.setBackground(Color.WHITE);
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
