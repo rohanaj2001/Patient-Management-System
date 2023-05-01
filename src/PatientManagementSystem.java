@@ -15,31 +15,47 @@ public PatientManagementSystem(PatientDAO patientDAO) {
 
     setTitle("Patient Management System");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(800, 600);
+    setSize(1600, 1200);
+
+    BoxLayout layout = new BoxLayout(getContentPane(), BoxLayout.Y_AXIS);
+        getContentPane().setLayout(layout);
+
 
     JPanel mainPanel = new JPanel(new BorderLayout());
+    JPanel topPanel = new JPanel(new BorderLayout());
+    JPanel middlePanel = new JPanel(new BorderLayout());
+    JPanel bottomPanel = new JPanel(new BorderLayout());
 
     // Create a panel for adding new patients
-    JPanel addPanel = new JPanel(new FlowLayout(4));
-    JTextField idField = new JTextField();
-    JTextField nameField = new JTextField();
-    JTextField addressField = new JTextField();
-    JTextField phoneField = new JTextField();
+    JPanel addPanel = new JPanel(new FlowLayout(50));
+
+    // Create the text fields and set their preferred size
+    JTextField idField = new JTextField(10);
+    JTextField nameField = new JTextField(20);
+    JTextField AddressField = new JTextField(20);
+    JTextField phoneField = new JTextField(10);
+    idField.setPreferredSize(new Dimension(idField.getPreferredSize().width, 30));
+    nameField.setPreferredSize(new Dimension(nameField.getPreferredSize().width, 30));
+    AddressField.setPreferredSize(new Dimension(AddressField.getPreferredSize().width, 30));
+    phoneField.setPreferredSize(new Dimension(phoneField.getPreferredSize().width, 30));
+    
+    // Add the components to the addPanel
     addPanel.add(new JLabel("ID: "));
     addPanel.add(idField);
     addPanel.add(new JLabel("Name: "));
     addPanel.add(nameField);
     addPanel.add(new JLabel("Address: "));
-    addPanel.add(addressField);
+    addPanel.add(AddressField);
     addPanel.add(new JLabel("Phone: "));
     addPanel.add(phoneField);
     JButton addButton = new JButton("Add");
+    addButton.setPreferredSize(new Dimension(80, 30));
     addButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = Integer.parseInt(idField.getText());
             String name = nameField.getText();
-            String address = addressField.getText();
+            String address = AddressField.getText();
             String phone = phoneField.getText();
             Patient patient = new Patient(id, name, address, phone);
             boolean success = patientDAO.addPatient(patient);
@@ -52,33 +68,15 @@ public PatientManagementSystem(PatientDAO patientDAO) {
         }
     });
     addPanel.add(addButton);
+    //adding end
 
-    // Create a panel for searching for patients by ID
-    JPanel searchPanel = new JPanel(new FlowLayout());
-    JTextField searchField = new JTextField(20);
-    searchPanel.add(new JLabel("Search by ID: "));
-    searchPanel.add(searchField);
-    JButton searchButton = new JButton("Search");
-    searchButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int id = Integer.parseInt(searchField.getText());
-            Patient patient = patientDAO.getPatientById(id);
-            if (patient != null) {
-                JOptionPane.showMessageDialog(PatientManagementSystem.this, patient.toString());
-            } else {
-                JOptionPane.showMessageDialog(PatientManagementSystem.this, "No patient found with ID " + id);
-            }
-        }
-    });
-    searchPanel.add(searchButton);
 
     // Create a panel for updating existing patients
-    JPanel updatePanel = new JPanel(new GridLayout(5, 2));
-    JTextField updateIdField = new JTextField();
-    JTextField updateNameField = new JTextField();
-    JTextField updateAddressField = new JTextField();
-    JTextField updatePhoneField = new JTextField();
+    JPanel updatePanel = new JPanel(new FlowLayout(50));
+    JTextField updateIdField = new JTextField(10);
+    JTextField updateNameField = new JTextField(20);
+    JTextField updateAddressField = new JTextField(20);
+    JTextField updatePhoneField = new JTextField(10);
     updatePanel.add(new JLabel("ID: "));
     updatePanel.add(updateIdField);
     updatePanel.add(new JLabel("Name: "));
@@ -88,6 +86,11 @@ public PatientManagementSystem(PatientDAO patientDAO) {
     updatePanel.add(new JLabel("Phone: "));
     updatePanel.add(updatePhoneField);
     JButton updateButton = new JButton("Update");
+    updateButton.setPreferredSize(new Dimension(80, 30));
+    updateIdField.setPreferredSize(new Dimension(idField.getPreferredSize().width, 30));
+    updateNameField.setPreferredSize(new Dimension(nameField.getPreferredSize().width, 30));
+    updateAddressField.setPreferredSize(new Dimension(AddressField.getPreferredSize().width, 30));
+    updatePhoneField.setPreferredSize(new Dimension(phoneField.getPreferredSize().width, 30));
     updateButton.addActionListener(new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -102,16 +105,43 @@ public PatientManagementSystem(PatientDAO patientDAO) {
     JOptionPane.showMessageDialog(PatientManagementSystem.this, "Patient updated successfully.");
     } else {
     JOptionPane.showMessageDialog(PatientManagementSystem.this, "Error updating patient.");
-    }
+    }	
     }
     });
     updatePanel.add(updateButton);
+    
+    
+     // Create a panel for searching for patients by ID
+     JPanel searchPanel = new JPanel(new FlowLayout(50));
+     JTextField searchField = new JTextField(10);
+     searchField.setPreferredSize(new Dimension(searchField.getPreferredSize().width, 30)); // Set the preferred height of the searchField
+     searchPanel.add(new JLabel("Search by ID: "));
+     searchPanel.add(searchField);
+     JButton searchButton = new JButton("Search");
+     searchButton.setPreferredSize(new Dimension(80, 30));
+     searchButton.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+             int id = Integer.parseInt(searchField.getText());
+             Patient patient = patientDAO.getPatientById(id);
+             if (patient != null) {
+                 JOptionPane.showMessageDialog(PatientManagementSystem.this, patient.toString());
+             } else {
+                 JOptionPane.showMessageDialog(PatientManagementSystem.this, "No patient found with ID " + id);
+             }
+         }
+     });
+     searchPanel.add(searchButton);
+
+    
     // Create a panel for deleting patients
-    JPanel deletePanel = new JPanel(new FlowLayout(100));
-    JTextField deleteField = new JTextField(20);
+    JPanel deletePanel = new JPanel(new FlowLayout(50));
+    JTextField deleteField = new JTextField(10);
+    deleteField.setPreferredSize(new Dimension(deleteField.getPreferredSize().width, 30)); // Set the preferred height of the deleteField
     deletePanel.add(new JLabel("Delete by ID: "));
     deletePanel.add(deleteField);
     JButton deleteButton = new JButton("Delete");
+    deleteButton.setPreferredSize(new Dimension(80, 30));
     deleteButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -126,19 +156,42 @@ public PatientManagementSystem(PatientDAO patientDAO) {
         }
     });
     deletePanel.add(deleteButton);
+    //updating end
 
     // Create a table for displaying patients
     patientTableModel = new DefaultTableModel(new Object[]{"ID", "Name", "Address", "Phone"}, 0);
     patientTable = new JTable(patientTableModel);
     JScrollPane patientScrollPane = new JScrollPane(patientTable);
 
-    mainPanel.add(addPanel, BorderLayout.NORTH);
-    mainPanel.add(searchPanel, BorderLayout.WEST);
-    mainPanel.add(updatePanel, BorderLayout.CENTER);
-    mainPanel.add(deletePanel, BorderLayout.EAST);
-    mainPanel.add(patientScrollPane, BorderLayout.SOUTH);
+    topPanel.add(addPanel, BorderLayout.CENTER);
+    middlePanel.add(searchPanel, BorderLayout.LINE_START);
+    middlePanel.add(deletePanel, BorderLayout.LINE_END);
+    bottomPanel.add(updatePanel, BorderLayout.CENTER);
 
-    setContentPane(mainPanel);
+
+    getContentPane().add(Box.createVerticalGlue());
+    getContentPane().add(topPanel);
+    getContentPane().add(Box.createVerticalStrut(10));
+    getContentPane().add(middlePanel);
+    getContentPane().add(Box.createVerticalStrut(10));
+    getContentPane().add(bottomPanel);
+    getContentPane().add(Box.createVerticalStrut(10));
+    getContentPane().add(patientScrollPane);
+    getContentPane().add(Box.createVerticalGlue());
+
+
+    topPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    middlePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    bottomPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    patientScrollPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    // mainPanel.add(topPanel, BorderLayout.NORTH);
+    // mainPanel.add(middlePanel, BorderLayout.CENTER);
+    // mainPanel.add(bottomPanel, BorderLayout.CENTER);
+    // mainPanel.add(patientScrollPane, BorderLayout.SOUTH);
+
+
+    // setContentPane(mainPanel);
     setVisible(true);
 
     updatePatientTable();
